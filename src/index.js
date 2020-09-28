@@ -28,7 +28,7 @@ class Board extends React.Component {
     constructor(props){
         super(props);
             this.state={//json
-                squares:Array(9).fill(null)
+                squares:Array(9).fill(null),
                 xIsNext: true,
             };
     }
