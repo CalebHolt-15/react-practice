@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-
+//..........................................
 const user = { //json.
 
 
@@ -27,17 +27,7 @@ function getGreeting(user) {
 }
 
 //....................
-function tick() {
-    const element = (
-        <div>
-            <h1>Hello, world!</h1>
-            <h2>It is {new Date().toLocaleTimeString()}.</h2>
-        </div>
-    );
-    // ReactDOM.render(element, document.getElementById('root'));
-}
 
-setInterval(tick, 1000);
 
 //.......................
 function Comment(props) {
@@ -87,11 +77,54 @@ const comment = {
     },
 };
 
+// ReactDOM.render(
+//     <Comment
+//         date={comment.date}
+//         text={comment.text}
+//         author={comment.author}
+//     />,
+//     document.getElementById('root')
+// );
+
+//..............................................
+// function Clock(props) {
+//     return(
+//         <div>
+//             <h1>Hello, world!</h1>
+//             <h2>It is {props.date.toLocaleTimeString()}</h2>
+//         </div>
+//     );
+//     // ReactDOM.render(clock, document.getElementById('root'));
+// }
+//  function tick(){
+//     ReactDOM.render(
+//         <Clock date={new Date()}/>
+//         ,document.getElementById("root"))
+//  }
+//
+// setInterval(tick, 1000);
+
+// convert fxn to class /////////////////////////
+
+class Clock extends React.Component{
+    constructor(props) {
+        super(props);
+        this.state={
+                     date:new Date()
+                    };
+    }
+    render() {
+       return(
+           <div>
+               <h1>Hello, world!</h1>
+               <h2>It is {this.state.date.toLocaleTimeString()}</h2>
+           </div>);
+    }
+}
+
 ReactDOM.render(
-    <Comment
-        date={comment.date}
-        text={comment.text}
-        author={comment.author}
-    />,
-    document.getElementById('root')
-);
+        <Clock />,
+        document.getElementById("root"));
+
+
+ setInterval(Clock,1000);
