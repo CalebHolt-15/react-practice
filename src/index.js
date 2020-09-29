@@ -138,9 +138,19 @@ render() {   //2nd
     }
   }
 
+function App() {
+    return (
+        <div>
+            <Clock />
+            <Clock />
+            <Clock />
+        </div>
+    );
+}
+
 ReactDOM.render(
-        <Clock />,
-        document.getElementById("root"));
+    <App />,
+    document.getElementById('root')
+);
 
-
- // setInterval(Clock,1000);
+// setInterval(Clock,1000);
