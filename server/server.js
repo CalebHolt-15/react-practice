@@ -3,6 +3,11 @@ const mongoose = require('mongoose');
 
 var app = express();
 
+var bodyParser = require('body-parser');
+
+// Create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
 mongoose.connect('mongodb://localhost:27017/test',{useNewUrlParser:true, useUnifiedTopology: true})
 
 const db = mongoose.connection;
@@ -12,12 +17,13 @@ db.once('open', function() {
 });
 
 // schema.................................
-const kittySchema = new mongoose.Schema({
-    name: String
+const UserSchema = new mongoose.Schema({
+    username: String,
+    password: String
 });
 
 //model......................modelname;kitten
-const Kitten = mongoose.model('Kitten', kittySchema);
+const User = mongoose.model('User', UserSchema);
 
 
 // app.use(express.static('./public'));
@@ -30,15 +36,15 @@ app.get('/index.html', function (req, res) {
     res.sendFile( __dirname + "/" + "index.html" );
 })
 
-app.get('/add_kitten', function (req, res) {
+app.post('/adduser',urlencodedParser, function (req, res) {
     // Prepare output in JSON format
     console.log(req)
-    const newkitten = new Kitten({name:req.query.kitten_name})
+    const newuser = new User({username:req.body.username, password:req.body.password})
 
-    newkitten.save(function(err,kitten){
+    newuser.save(function(err,user){
         if(err)return console.error(err);
-        console.log(kitten.name);
-        res.send(kitten.name)
+        console.log(user.username);
+        res.send('registered user')
     })
 })
 
