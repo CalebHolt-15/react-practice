@@ -1,13 +1,31 @@
 var express = require('express');
 var app = express();
 
-app.use(express.static('./public'));
+// app.use(express.static('./public'));
 
+app.use(express.static('public'));
 
+app.get('/home.htm', function (req, res) {
+    console.log('home.htm requested');
+    res.sendFile( __dirname + "/" + "home.htm" );
+
+})
+
+app.get('/process_get', function (req, res) {
+    // Prepare output in JSON format
+    var msg = {
+        first_name:req.query.first_name,
+        last_name:req.query.last_name
+    };
+    console.log(msg);
+    res.send(JSON.stringify(msg));
+})
 
 var server = app.listen(8081, function () {
-    var host = '127.0.0.1'
+    var host = server.address().address
     var port = server.address().port
 
     console.log("Example app listening at http://%s:%s", host, port)
 })
+
+
