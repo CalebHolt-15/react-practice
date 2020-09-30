@@ -3,9 +3,7 @@ var app = express();
 
 app.use(express.static('./public'));
 
-app.get('/',function(req,res){
-    res.send('hello');
-})
+
 
 var server = app.listen(8081, function () {
     var host = '127.0.0.1'
