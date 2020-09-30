@@ -48,9 +48,31 @@ app.post('/adduser',urlencodedParser, function (req, res) {
     })
 })
 
+app.get('/userlogin',urlencodedParser, function(req,res){
+
+
+    User.findOne({ username: req.body.username }, function (err, user) {
+        if(err){
+            res.send('error is found')
+        }
+        if(user){
+            if(user.password===req.body.password){
+                res.send('welcom back')
+            }else{
+                res.send('incorect pasword')
+            }
+        }
+        else{
+            res.send('user not exist')
+        }
+    });
+} )
+
+
 var server = app.listen(8081, function () {
     var host = server.address().address
     var port = server.address().port
 
     console.log("Example app listening at http://%s:%s", host, port)
 })
+
