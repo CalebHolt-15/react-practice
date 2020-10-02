@@ -7,6 +7,6 @@ import RegisterForm from './register';
 import App from './app'
 
 ReactDOM.render(
-    <App />,
+    <App1 />,
     document.getElementById('root')
 );
